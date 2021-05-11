@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "DP203AzureDF"
 		},
+		"AzureSqlDatabaseLinkedService_connectionString": {
+			"value": ""
+		},
 		"AzureStorageLinkedService_connectionString": {
 			"value": ""
 		},
