@@ -1,0 +1,17 @@
+{
+	"name": "DataLoadFullPower",
+	"properties": {
+		"content": {
+			"query": "-- Connect to the SQL pool\nCREATE USER loader FOR LOGIN loader;\nGRANT ADMINISTER DATABASE BULK OPERATIONS TO loader;\nGRANT INSERT ON <yourtablename> TO loader;\nGRANT SELECT ON <yourtablename> TO loader;\nGRANT CREATE TABLE TO loader;\nGRANT ALTER ON SCHEMA::dbo TO loader;\n\nCREATE WORKLOAD GROUP DataLoads\nWITH ( \n    MIN_PERCENTAGE_RESOURCE = 100\n    ,CAP_PERCENTAGE_RESOURCE = 100\n    ,REQUEST_MIN_RESOURCE_GRANT_PERCENT = 100\n    );\n\nCREATE WORKLOAD CLASSIFIER [wgcELTLogin]\nWITH (\n        WORKLOAD_GROUP = 'DataLoads'\n    ,MEMBERNAME = 'loader'\n);",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "dedicatedsqlpool",
+				"databaseName": "dedicatedsqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
